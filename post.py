@@ -9,9 +9,12 @@ KickOtherLogin = False
 ID = PTT_ACCOUNT
 Password = PTT_PASSWORD
 
-PTTCrawler = PTT.Library(ID, Password, kickOtherLogin=False)
-if not PTTCrawler.isLoginSuccess():
-    PTTCrawler.Log('登入失敗')
+PTTBot = PTT.Library(kickOtherLogin=False)
+
+ErrCode = PTTBot.login(ID, Password)
+
+if not PTTBot.isLoginSuccess():
+    PTTBot.Log('登入失敗')
     sys.exit()
 
 # 這個範例是如何PO文
@@ -44,14 +47,14 @@ twitter日飯製入口&分析站 http://tw48.net/\r\n
 TPE instagram彙整網站 https://tenten.tw/tpeig/ \r\n
 \r\n
 showroom 48 過濾 新工具: chrome extensions https://bit.ly/2HjQza9 \r\n
- 類似之前的網頁版本，但是只有現在正在開播的清單。 \r\n
+\r\n
 \r\n
 '''
 
-    ErrorCode = PTTCrawler.post('AKB48', title, contents, 0, 0)
-    if ErrorCode == PTTCrawler.Success:
-        PTTCrawler.Log('在 Test 板發文成功')
-    elif ErrorCode == PTTCrawler.NoPermission:
-        PTTCrawler.Log('發文權限不足')
+    ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
+    if ErrorCode == PTT.ErrorCode.Success:
+        PTTBot.Log('在 Test 板發文成功')
+    elif ErrorCode == PTT.ErrorCode.NoPermission:
+        PTTBot.Log('發文權限不足')
     else:
-        PTTCrawler.Log('在 Test 板發文失敗')
+        PTTBot.Log('在 Test 板發文失敗')

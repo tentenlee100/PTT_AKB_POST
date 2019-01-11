@@ -185,3 +185,5 @@ fabric.properties
 .DS_Store?
 .Trashes
 Thumbs.db
+
+config.py

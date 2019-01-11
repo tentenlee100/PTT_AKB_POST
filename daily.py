@@ -178,17 +178,14 @@ if ErrCode != PTT.ErrorCode.Success:
     PTTBot.Log('登入失敗')
     sys.exit()
 
-# ErrorCode = PTTCrawler.post('AKB48', title, contents, 0, 0)
-# if ErrorCode == PTTCrawler.Success:
-#     PTTCrawler.Log('在 Test 板發文成功')
-#     PTTCrawler.throwWaterBall('emperor', '測試 今日閒聊文已發文')
-#
-# elif ErrorCode == PTTCrawler.NoPermission:
-#     PTTCrawler.Log('發文權限不足')
-# else:
-#     PTTCrawler.Log('在 Test 板發文失敗')
+ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
+if ErrorCode == PTT.ErrorCode.Success:
+    PTTBot.Log('在 Test 板發文成功')
+    PTTBot.throwWaterBall('emperor', '測試 今日閒聊文已發文')
 
-PTTBot.throwWaterBall('emperor', '測試 今日閒聊文已發文')
-
+elif ErrorCode == PTT.ErrorCode.NoPermission:
+    PTTBot.Log('發文權限不足')
+else:
+    PTTBot.Log('在 Test 板發文失敗')
 
 PTTBot.logout()
