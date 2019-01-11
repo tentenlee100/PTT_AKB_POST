@@ -11,28 +11,29 @@ from schedule import (
 from birthday import GetBirthMember
 from config import *
 
-def add_title(contents, title):
+
+def add_title(_contents, _title):
     title_len = 0
-    for s in title:
+    for s in _title:
         if len(s) == len(s.encode()):
             if title_len + 1 < 80:
                 title_len += 1
-                contents += str(s)
+                _contents += str(s)
             else:
-                contents += "\r\n"
+                _contents += "\r\n"
                 title_len = 1
-                contents += str(s)
+                _contents += str(s)
         else:
             if title_len + 2 < 80:
                 title_len += 2
-                contents += str(s)
+                _contents += str(s)
             else:
-                contents += "\r\n"
+                _contents += "\r\n"
                 title_len = 2
-                contents += str(s)
-    contents += "\r\n"
+                _contents += str(s)
+    _contents += "\r\n"
 
-    return contents
+    return _contents
 
 
 __MEMBER_BIRTH_FORMAT__: Dict[str, str] = {
@@ -64,6 +65,8 @@ contents += "╭─────────────────────�
 contents += "│\x15[1;33m http://goo.gl/hKilDn            即時影音連結  \x15[m│                             " + "\r\n"
 contents += "│\x15[1;33m https://akb48-bili.tenten.tw/   B站撈取網頁  \x15[m│                            " + "\r\n"
 contents += "╰───────────────────────╯                             " + "\r\n"
+contents += "https://bit.ly/2M9ATbS 程式開源 有需要可自取" + "\r\n"
+contents += "                                                                              " + "\r\n"
 contents += "\x15[1;43m                              \x15[40m■ \x15[33m歷史上的今天\x15[37m■\x15[43m                             \x15[m   " + "\r\n"
 contents += "                                                                              " + "\r\n"
 
