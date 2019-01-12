@@ -184,7 +184,7 @@ if ErrCode != PTT.ErrorCode.Success:
 ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
 if ErrorCode == PTT.ErrorCode.Success:
     PTTBot.Log('在 Test 板發文成功')
-    PTTBot.throwWaterBall('emperor', '測試 今日閒聊文已發文')
+    PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
 
 elif ErrorCode == PTT.ErrorCode.NoPermission:
     PTTBot.Log('發文權限不足')
