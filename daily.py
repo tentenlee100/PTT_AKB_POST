@@ -8,7 +8,7 @@ import datetime
 from schedule import (
     Akb, Team8, Ske, Nmb, Hkt, Ngt, Stu
 )
-from birthday import GetBirthMember
+from tools import (GetBirthMember, GetTheater)
 from config import *
 
 
@@ -46,6 +46,16 @@ __MEMBER_BIRTH_FORMAT__: Dict[str, str] = {
     'BNK48': "\x15[1;37m＊ \x15[0;35mBNK48      \x15[1;37m  ({age})  {name}\x15[m",
     'AKB48 TeamTP': "\x15[1;37m＊ \x15[33mAKB48 TeamTP\x15[37m ({age})  {name}\x15[m",
 }
+
+__THEATER_FORMAT__: Dict[str, str] = {
+    'AKB48': "\x15[1;35m╭─────╮\x15[m \r\n\x15[1;35m│AKB48 劇場│\x15[m {title} \r\n\x15[1;35m╰─────┴───────────────────────────────\x15[m \r\n",
+    'SKE48': "\x15[1;33m╭─────╮\x15[m \r\n\x15[1;33m│SKE48 劇場│\x15[m {title} \r\n\x15[1;33m╰─────┴───────────────────────────────\x15[m \r\n",
+    'NMB48': "\x15[1;32m╭─────╮\x15[m \r\n\x15[1;32m│NMB48 劇場│\x15[m {title} \r\n\x15[1;32m╰─────┴───────────────────────────────\x15[m \r\n",
+    'HKT48': "\x15[1;36m╭─────╮\x15[m \r\n\x15[1;36m│HKT48 劇場│\x15[m {title} \r\n\x15[1;36m╰─────┴───────────────────────────────\x15[m \r\n",
+    'NGT48': "\x15[1;31m╭─────╮\x15[m \r\n\x15[1;31m│NGT48 劇場│\x15[m {title} \r\n\x15[1;31m╰─────┴───────────────────────────────\x15[m \r\n",
+    'STU48': "\x15[1;37m╭─────╮\x15[m \r\n\x15[1;37m│STU48 劇場│\x15[m {title} \r\n\x15[1;37m╰─────┴───────────────────────────────\x15[m \r\n",
+}
+
 
 # 這個範例是如何PO文
 # 第一個參數是你要PO文的板
@@ -103,6 +113,7 @@ for schedule in result:
         start_time = "     "
     line = "{start_time}  {title}".format(start_time=start_time, title=schedule.title)
     contents = add_title(contents, line)
+
 # Ske
 contents += " " + "\r\n"
 contents += "\x15[1;33m◣\x15[37mSKE48\x15[33m◥├─────────────────────────────────\x15[m" + "\r\n"
@@ -167,6 +178,24 @@ for schedule in result:
     line = "{start_time}  {title}".format(start_time=start_time, title=schedule.title)
     contents = add_title(contents, line)
 
+# 找劇場
+contents += " " + "\r\n"
+contents += " " + "\r\n"
+contents += " " + "\r\n"
+contents += "\x15[1;42m                              \x15[40m■劇場公演情報■\x15[42m                              \x15[m" + "\r\n"
+contents += " " + "\r\n"
+
+
+theater_list = GetTheater().get_schedule(query_date)
+
+for theater in theater_list.keys():
+    for event in theater_list[theater]:
+        group_format = __THEATER_FORMAT__[theater]
+        contents += group_format.format(title=event["title"])
+        contents = add_title(contents, event["members"])
+        contents += " " + "\r\n"
+
+
 print(contents)
 
 KickOtherLogin = False
@@ -184,7 +213,7 @@ if ErrCode != PTT.ErrorCode.Success:
 ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
 if ErrorCode == PTT.ErrorCode.Success:
     PTTBot.Log('在 Test 板發文成功')
-    PTTBot.throwWaterBall('emperor', '測試 今日閒聊文已發文')
+    PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
 
 elif ErrorCode == PTT.ErrorCode.NoPermission:
     PTTBot.Log('發文權限不足')
