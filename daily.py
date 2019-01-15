@@ -8,7 +8,7 @@ import datetime
 from schedule import (
     Akb, Team8, Ske, Nmb, Hkt, Ngt, Stu
 )
-from birthday import GetBirthMember
+from tools import GetBirthMember
 from config import *
 
 

@@ -62,6 +62,6 @@ class GetBirthMember(object):
 
 if __name__ == '__main__':
     query_date = datetime.datetime.today().strftime("/%m/%d")
-    query_date = '/11/26'
+    # query_date = '/12/24'
     members = GetBirthMember().get_birth_member(query_date)
     print(members)
