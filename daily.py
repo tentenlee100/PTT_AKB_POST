@@ -220,26 +220,26 @@ contents += "※ 影音整理：fatetree  \r\n"
 
 print(contents)
 
-# KickOtherLogin = False
-#
-# ID = PTT_ACCOUNT
-# Password = PTT_PASSWORD
-#
-# PTTBot = PTT.Library(kickOtherLogin=False)
-#
-# ErrCode = PTTBot.login(ID, Password)
-# if ErrCode != PTT.ErrorCode.Success:
-#     PTTBot.Log('登入失敗')
-#     sys.exit()
-#
-# ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
-# if ErrorCode == PTT.ErrorCode.Success:
-#     PTTBot.Log('在 Test 板發文成功')
-#     PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
-#
-# elif ErrorCode == PTT.ErrorCode.NoPermission:
-#     PTTBot.Log('發文權限不足')
-# else:
-#     PTTBot.Log('在 Test 板發文失敗')
-#
-# PTTBot.logout()
+KickOtherLogin = False
+
+ID = PTT_ACCOUNT
+Password = PTT_PASSWORD
+
+PTTBot = PTT.Library(kickOtherLogin=False)
+
+ErrCode = PTTBot.login(ID, Password)
+if ErrCode != PTT.ErrorCode.Success:
+    PTTBot.Log('登入失敗')
+    sys.exit()
+
+ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
+if ErrorCode == PTT.ErrorCode.Success:
+    PTTBot.Log('在 Test 板發文成功')
+    PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
+
+elif ErrorCode == PTT.ErrorCode.NoPermission:
+    PTTBot.Log('發文權限不足')
+else:
+    PTTBot.Log('在 Test 板發文失敗')
+
+PTTBot.logout()
