@@ -8,7 +8,7 @@ import datetime
 from schedule import (
     Akb, Team8, Ske, Nmb, Hkt, Ngt, Stu
 )
-from tools import (GetBirthMember, GetTheater)
+from tools import (GetBirthMember, GetTheater, GetVideo)
 from config import *
 
 
@@ -195,29 +195,51 @@ for theater in theater_list.keys():
         contents = add_title(contents, event["members"])
         contents += " " + "\r\n"
 
+# 找影音連結
+contents += " " + "\r\n"
+contents += " " + "\r\n"
+contents += " " + "\r\n"
+contents += "\x15[1;44m                              \x15[40m■影音連結整理■\x15[44m                              \x15[m" + "\r\n"
+contents += " " + "\r\n"
+contents += " " + "\r\n"
+
+video_list = GetVideo().get_video()
+
+video_title_format = '\x15[1;33m{title}\x15[m \r\n\r\n'
+
+for type in video_list:
+    contents += video_title_format.format(title=type['title'])
+    for links in type['links']:
+        for links_detail in links:
+            contents = add_title(contents, links_detail)
+        contents += " " + "\r\n"
+    contents += " " + "\r\n"
+
+contents += "※ 影音整理：fatetree  \r\n"
+
 
 print(contents)
 
-KickOtherLogin = False
-
-ID = PTT_ACCOUNT
-Password = PTT_PASSWORD
-
-PTTBot = PTT.Library(kickOtherLogin=False)
-
-ErrCode = PTTBot.login(ID, Password)
-if ErrCode != PTT.ErrorCode.Success:
-    PTTBot.Log('登入失敗')
-    sys.exit()
-
-ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
-if ErrorCode == PTT.ErrorCode.Success:
-    PTTBot.Log('在 Test 板發文成功')
-    PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
-
-elif ErrorCode == PTT.ErrorCode.NoPermission:
-    PTTBot.Log('發文權限不足')
-else:
-    PTTBot.Log('在 Test 板發文失敗')
-
-PTTBot.logout()
+# KickOtherLogin = False
+#
+# ID = PTT_ACCOUNT
+# Password = PTT_PASSWORD
+#
+# PTTBot = PTT.Library(kickOtherLogin=False)
+#
+# ErrCode = PTTBot.login(ID, Password)
+# if ErrCode != PTT.ErrorCode.Success:
+#     PTTBot.Log('登入失敗')
+#     sys.exit()
+#
+# ErrorCode = PTTBot.post('AKB48', title, contents, 0, 0)
+# if ErrorCode == PTT.ErrorCode.Success:
+#     PTTBot.Log('在 Test 板發文成功')
+#     PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
+#
+# elif ErrorCode == PTT.ErrorCode.NoPermission:
+#     PTTBot.Log('發文權限不足')
+# else:
+#     PTTBot.Log('在 Test 板發文失敗')
+#
+# PTTBot.logout()
