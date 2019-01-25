@@ -205,7 +205,7 @@ contents += " " + "\r\n"
 
 video_list = GetVideo().get_video()
 
-video_title_format = '\x15[1;33m{title}\x15[m \r\n\r\n'
+video_title_format = '\x15[1;33m{title}\x15[m\r\n\r\n'
 
 for type in video_list:
     contents += video_title_format.format(title=type['title'])
