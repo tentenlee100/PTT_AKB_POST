@@ -56,6 +56,15 @@ __THEATER_FORMAT__: Dict[str, str] = {
     'STU48': "\x15[1;37m╭─────╮\x15[m \r\n\x15[1;37m│STU48 劇場│\x15[m {title} \r\n\x15[1;37m╰─────┴───────────────────────────────\x15[m \r\n",
 }
 
+__SCHEDULE_TITLE_FORMAT__: Dict[str, str] = {
+    'AKB48': "\x15[1;35m◣\x15[37mAKB48\x15[35m◥├─────────────────────────────────\x15[m\r\n\x15[1;35m╡\x15[37mメディア、イベント\x15[m\r\n",
+    'SKE48': "\x15[1;33m◣\x15[37mSKE48\x15[33m◥├─────────────────────────────────\x15[m\r\n\x15[1;33m╡\x15[37mメディア、イベント\x15[m\r\n",
+    'NMB48': "\x15[1;32m◣\x15[37mNMB48\x15[32m◥├─────────────────────────────────\x15[m\r\n\x15[1;32m╡\x15[37mメディア、イベント\x15[m\r\n",
+    'HKT48': "\x15[1;36m◣\x15[37mHKT48\x15[36m◥├─────────────────────────────────\x15[m\r\n\x15[1;36m╡\x15[37mメディア、イベント\x15[m\r\n",
+    'NGT48': "\x15[1;31m◣\x15[37mNGT48\x15[31m◥├─────────────────────────────────\x15[m\r\n\x15[1;31m╡\x15[37mメディア、イベント\x15[m\r\n",
+    'STU48': "\x15[1;34m◣\x15[37mSTU48\x15[34m◥├─────────────────────────────────\x15[m\r\n\x15[1;34m╡\x15[37mメディア、イベント\x15[m\r\n",
+}
+
 
 # 這個範例是如何PO文
 # 第一個參數是你要PO文的板
@@ -95,9 +104,8 @@ query_date = datetime.datetime.today().strftime("%Y/%m/%d")
 contents += "\x15[1;46m                              \x15[40m■今日媒體行程■\x15[46m                            \x15[m    " + "\r\n"
 contents += " " + "\r\n"
 # AKB
-contents += "\x15[1;35m◣\x15[37mAKB48\x15[35m◥├─────────────────────────────────\x15[m" + "\r\n"
-contents += "\x15[1;35m╡\x15[37mメディア、イベント\x15[m" + "\r\n"
-
+contents += __SCHEDULE_TITLE_FORMAT__['AKB48']
+contents += " " + "\r\n"
 result = Akb(query_date).get_schedule()
 for schedule in result:
     start_time = schedule.start_time
@@ -116,8 +124,7 @@ for schedule in result:
 
 # Ske
 contents += " " + "\r\n"
-contents += "\x15[1;33m◣\x15[37mSKE48\x15[33m◥├─────────────────────────────────\x15[m" + "\r\n"
-contents += "\x15[1;33m╡\x15[37mメディア、イベント\x15[m" + "\r\n"
+contents += __SCHEDULE_TITLE_FORMAT__['SKE48']
 
 result = Ske(query_date).get_schedule()
 for schedule in result:
@@ -128,8 +135,7 @@ for schedule in result:
     contents = add_title(contents, line)
 # Nmb
 contents += " " + "\r\n"
-contents += "\x15[1;32m◣\x15[37mNMB48\x15[32m◥├─────────────────────────────────\x15[m" + "\r\n"
-contents += "\x15[1;32m╡\x15[37mメディア、イベント\x15[m" + "\r\n"
+contents += __SCHEDULE_TITLE_FORMAT__['NMB48']
 
 result = Nmb(query_date).get_schedule()
 for schedule in result:
@@ -141,8 +147,7 @@ for schedule in result:
 
 # HKT
 contents += " " + "\r\n"
-contents += "\x15[1;36m◣\x15[37mHKT48\x15[36m◥├─────────────────────────────────\x15[m" + "\r\n"
-contents += "\x15[1;36m╡\x15[37mメディア、イベント\x15[m" + "\r\n"
+contents += __SCHEDULE_TITLE_FORMAT__['HKT48']
 
 result = Hkt(query_date).get_schedule()
 for schedule in result:
@@ -154,8 +159,7 @@ for schedule in result:
 
 # NGT
 contents += " " + "\r\n"
-contents += "\x15[1;31m◣\x15[37mNGT48\x15[31m◥├─────────────────────────────────\x15[m" + "\r\n"
-contents += "\x15[1;31m╡\x15[37mメディア、イベント\x15[m" + "\r\n"
+contents += __SCHEDULE_TITLE_FORMAT__['NGT48']
 
 result = Ngt(query_date).get_schedule()
 for schedule in result:
@@ -167,8 +171,7 @@ for schedule in result:
 
 # STU
 contents += " " + "\r\n"
-contents += "\x15[1;34m◣\x15[37mSTU48\x15[34m◥├─────────────────────────────────\x15[m" + "\r\n"
-contents += "\x15[1;34m╡\x15[37mメディア、イベント\x15[m" + "\r\n"
+contents += __SCHEDULE_TITLE_FORMAT__['STU48']
 
 result = Stu(query_date).get_schedule()
 for schedule in result:
