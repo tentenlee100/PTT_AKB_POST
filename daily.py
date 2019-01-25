@@ -62,7 +62,6 @@ def add_content_one_line(_title):
 
 
 class Daily(object):
-
     __MEMBER_BIRTH_FORMAT__: Dict[str, str] = {
         'AKB48': "\x15[1;37m＊ \x15[35mAKB48      \x15[37m  ({age})  {name}\x15[m",
         'SKE48': "\x15[1;37m＊ \x15[33mSKE48      \x15[37m  ({age})  {name}\x15[m",
@@ -221,11 +220,12 @@ if __name__ == '__main__':
 
     print(contents)
 
-    KickOtherLogin = False
-
+    ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
     Password = PTT_PASSWORD
-
+    board = 'AKB48'
+    KickOtherLogin = False
+    ###
     PTTBot = PTT.Library(kickOtherLogin=KickOtherLogin)
 
     ErrCode = PTTBot.login(ID, Password)
@@ -233,10 +233,9 @@ if __name__ == '__main__':
         PTTBot.Log('登入失敗')
         sys.exit()
 
-    ErrorCode = PTTBot.post('TEST', title, contents, 0, 0)
+    ErrorCode = PTTBot.post(board, title, contents, 0, 0)
     if ErrorCode == PTT.ErrorCode.Success:
-        PTTBot.Log('在 Test 板發文成功')
-        PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
+        PTTBot.Log('在' + board + '板發文成功')
 
     elif ErrorCode == PTT.ErrorCode.NoPermission:
         PTTBot.Log('發文權限不足')
@@ -244,5 +243,3 @@ if __name__ == '__main__':
         PTTBot.Log('在 Test 板發文失敗')
 
     PTTBot.logout()
-
-
