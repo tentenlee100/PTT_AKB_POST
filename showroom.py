@@ -3,9 +3,37 @@ import time
 from PTTLibrary import PTT
 import datetime
 from config import *
+import os
 
 
 class Showroom(object):
+
+    @staticmethod
+    def get_lang_schedule() -> str:
+        contents = ""
+        st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d')
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        try:
+            team_tp_lang =""
+            dir_path = os.path.join(dir_path, "team_tp_lang")
+            file_path = os.path.join(dir_path, st + ".txt")
+            print(file_path)
+            file = open(file_path, "r", encoding="utf-8")
+            text = file.read().replace("\n", "\r\n")
+
+            team_tp_lang += "" + "\r\n"
+            team_tp_lang += "" + "\r\n"
+            team_tp_lang += "本日Team TP 浪live 時程表 " + "\r\n"
+            team_tp_lang += "" + "\r\n"
+            team_tp_lang += text + "\r\n"
+            team_tp_lang += "" + "\r\n"
+
+            contents += team_tp_lang
+            print(repr(text))
+        except Exception as e:
+            print("caught", repr(e))
+
+        return contents
 
     @staticmethod
     def get_content() -> str:
@@ -31,6 +59,8 @@ class Showroom(object):
         contents += "" + "\r\n"
         contents += "showroom 48 過濾 新工具: chrome extensions https://bit.ly/2HjQza9" + "\r\n"
         contents += "" + "\r\n"
+
+        contents += Showroom.get_lang_schedule()
 
         return contents
 
