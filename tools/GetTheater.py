@@ -6,7 +6,7 @@ from datetime import datetime
 class GetTheater(object):
     AKB_IMG_NAME = 'cat_logo_akb48'
     SKE_IMG_NAME = 'cat_logo_ske48'
-    NMB_IMG_NAME = 'cat_logo_nme48'
+    NMB_IMG_NAME = 'cat_logo_nmb48'
     HKT_IMG_NAME = 'cat_logo_hkt48'
     NGT_IMG_NAME = 'cat_logo_ngt48'
 
@@ -44,7 +44,7 @@ class GetTheater(object):
                     is_memeber_element = True
                     continue
                 if is_memeber_element:
-                    return_str = child.find().get_text().replace('\r\n', '\r\n\r\n').replace('※', '*')
+                    return_str = child.find().get_text().replace('\r\n', '\r\n\r\n').replace('※', '*').replace("��", "高")
                     is_memeber_element = False
 
         return return_str
@@ -95,6 +95,6 @@ class GetTheater(object):
 
 if __name__ == '__main__':
     query_date_str = datetime.today().strftime("%Y/%m/%d")
-    # query_date_str = '2019/01/13'
+    # query_date_str = '2019/02/05'
     members = GetTheater().get_schedule(query_date_str)
     print(members)
