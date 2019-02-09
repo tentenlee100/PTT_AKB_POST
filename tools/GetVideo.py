@@ -9,7 +9,7 @@ class GetVideo(object):
 
         r = requests.get('https://docs.google.com/document/export?format=txt&id=1e5IYXWMxCYEEKi4jnuaoy7BntcpDGqka54yrZEJl9FQ&includes_info_params=true'
                          )
-        txt = r.text
+        txt = r.text.replace("↗︎", "↗")
 
         start = txt.find('-----')
         txt = txt[start + 5:]
