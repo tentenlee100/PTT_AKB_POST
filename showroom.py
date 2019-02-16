@@ -4,6 +4,7 @@ from PTTLibrary import PTT
 import datetime
 from config import *
 import os
+import requests
 
 
 class Showroom(object):
@@ -14,22 +15,25 @@ class Showroom(object):
         st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d')
         dir_path = os.path.dirname(os.path.realpath(__file__))
         try:
-            team_tp_lang =""
-            dir_path = os.path.join(dir_path, "team_tp_lang")
-            file_path = os.path.join(dir_path, st + ".txt")
-            print(file_path)
-            file = open(file_path, "r", encoding="utf-8")
-            text = file.read().replace("\n", "\r\n")
+            team_tp_lang = ""
+            r = requests.post('https://us-central1-akb48-tp.cloudfunctions.net/langSchedule', {"date": st}
+                )
+            json = r.json()
+            if json is None or len(json) == 0:
+                return team_tp_lang
 
             team_tp_lang += "" + "\r\n"
             team_tp_lang += "" + "\r\n"
             team_tp_lang += "本日Team TP 浪live 時程表 " + "\r\n"
             team_tp_lang += "" + "\r\n"
-            team_tp_lang += text + "\r\n"
+
+            for member in json:
+                team_tp_lang += "{time} ({id}) {name}".format(time=member["time"], name=member["name"],id=member["lang"]) + "\r\n"
+
             team_tp_lang += "" + "\r\n"
 
             contents += team_tp_lang
-            print(repr(text))
+
         except Exception as e:
             print("caught", repr(e))
 
@@ -81,7 +85,7 @@ if __name__ == '__main__':
     ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
     Password = PTT_PASSWORD
-    board = 'AKB48'
+    board = 'TEST'
     KickOtherLogin = False
 
     ###
