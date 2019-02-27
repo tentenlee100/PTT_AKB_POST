@@ -71,17 +71,21 @@ class Showroom(object):
         contents += "" + "\r\n"
 
         contents += Showroom.get_lang_schedule()
+        contents += "" + "\r\n"
+        contents += "" + "\r\n"
+        contents += "https://akb48-tp.tenten.tw/#/lang team tp 浪相關紀錄 " + "\r\n"
+
 
         return contents
 
 
 if __name__ == '__main__':
     st = datetime.datetime.fromtimestamp(time.time()).strftime('%y%m%d')
-    title = '[LIVE] ' + st + ' Showroom+SNS直播 實況閒聊文'
+    title = '[LIVE] ' + st + ' Showroom & 浪直播 實況閒聊文'
     contents = Showroom.get_content()
 
     print(contents)
-
+    exit()
     ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
     Password = PTT_PASSWORD
