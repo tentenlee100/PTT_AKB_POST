@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     # 發送showroom文
     st = datetime.datetime.fromtimestamp(time.time()).strftime('%y%m%d')
-    showroom_title = '[LIVE] ' + st + ' Showroom+SNS直播 實況閒聊文'
+    showroom_title = '[LIVE] ' + st + ' Showroom & 浪直播 實況閒聊文'
     showroom_contents = Showroom.get_content()
     print(showroom_contents)
 
