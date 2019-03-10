@@ -4,6 +4,7 @@ from typing import Dict
 
 from PTTLibrary import PTT
 import datetime
+from uao import register_uao
 
 from schedule import (
     Akb, Team8, Ske, Nmb, Hkt, Ngt, Stu
@@ -210,6 +211,8 @@ class Daily(object):
         contents += " " + "\r\n"
         contents += "※ 影音整理：fatetree  \r\n"
 
+        register_uao()
+        contents = contents.encode("big5-uao", 'replace').decode("big5-uao", 'replace')
         return contents
 
 
@@ -219,6 +222,7 @@ if __name__ == '__main__':
     contents = Daily().get_content()
 
     print(contents)
+    # exit()
 
     ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
@@ -236,7 +240,8 @@ if __name__ == '__main__':
     ErrorCode = PTTBot.post(board, title, contents, 0, 0)
     if ErrorCode == PTT.ErrorCode.Success:
         PTTBot.Log('在' + board + '板發文成功')
-        PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
+        if board == 'AKB48':
+            PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
 
     elif ErrorCode == PTT.ErrorCode.NoPermission:
         PTTBot.Log('發文權限不足')

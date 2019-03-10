@@ -50,7 +50,8 @@ if __name__ == '__main__':
     ErrorCode = PTTBot.post(board, daily_title, daily_contents, 0, 0)
     if ErrorCode == PTT.ErrorCode.Success:
         PTTBot.Log('在' + board + '板今日閒聊文發文成功')
-        PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
+        if board == 'AKB48':
+            PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
 
     elif ErrorCode == PTT.ErrorCode.NoPermission:
         PTTBot.Log('發文權限不足')
