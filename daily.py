@@ -4,6 +4,7 @@ from typing import Dict
 
 from PTTLibrary import PTT
 import datetime
+from uao import register_uao
 
 from schedule import (
     Akb, Team8, Ske, Nmb, Hkt, Ngt, Stu
@@ -210,6 +211,8 @@ class Daily(object):
         contents += " " + "\r\n"
         contents += "※ 影音整理：fatetree  \r\n"
 
+        register_uao()
+        contents = contents.encode("big5-uao", 'replace').decode("big5-uao", 'replace')
         return contents
 
 
@@ -219,6 +222,7 @@ if __name__ == '__main__':
     contents = Daily().get_content()
 
     print(contents)
+    # exit()
 
     ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
