@@ -175,6 +175,8 @@ class Daily(object):
         contents += "╰───────────────────────╯                             " + "\r\n"
         contents += "                              https://bit.ly/2M9ATbS 程式開源 有需要可自取" + "\r\n"
         contents += "                                                                              " + "\r\n"
+        contents += "相關討論discord https://discord.gg/vXvk6D2 內有很多頻道可討論     \r\n"
+        contents += "                                                                              " + "\r\n"
 
         # 歷史上的今天 成員生日
         contents += "\x15[1;43m                              \x15[40m■ \x15[33m歷史上的今天\x15[37m■\x15[43m                             \x15[m   " + "\r\n"
@@ -222,7 +224,7 @@ if __name__ == '__main__':
     contents = Daily().get_content()
 
     print(contents)
-    # exit()
+    exit()
 
     ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
