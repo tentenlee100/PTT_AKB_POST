@@ -18,6 +18,7 @@ except ImportError:  # for test
 
 class Stu(object):
     query_date = datetime.today().strftime("%Y/%m/%d")
+    get_theater = False
     mapping_dic = {
         "が": "が",
         "ぎ": "ぎ",
@@ -70,7 +71,7 @@ class Stu(object):
         "ポ": "ポ"
     }
 
-    def __init__(self, query_date="", debug=False):
+    def __init__(self, query_date="", debug=False, theater=False):
         """Get query date string to datetime type.
 
         Args:
@@ -87,6 +88,9 @@ class Stu(object):
             self.today = datetime.strptime(self.query_date, "%Y/%m/%d")
         except (TypeError, ValueError):
             print("Please check your input date format (ex. 2018/10/10)")
+
+        self.get_theater = theater
+
 
     def check_title(self, title: str) -> str:
         return_title = title
@@ -166,7 +170,11 @@ class Stu(object):
         start_time = ""
         end_time = ""
         try:
-            all_p = root.find_all('p')
+            all_p =[]
+            if self.get_theater:
+                all_p = root.find_all('div')
+            else:
+                all_p = root.find_all('p')
             if len(all_p) == 0:
                 all_p = root.find_all('div')
 
@@ -223,7 +231,11 @@ class Stu(object):
                     start_time = self._parse_start_date(text[0])
                     if text.__len__() > 1:
                         end_time = self._parse_start_date(text[1])
-
+                if self.get_theater:
+                    find_start_index = html.find("開演")
+                    if find_start_index > -1:
+                        start_time = html[find_start_index - 6:find_start_index]
+                        start_time = "".join([x for x in start_time if x.isdigit() or x == ":"])
         except Exception as e:
             print("caught", repr(e))
 
@@ -254,7 +266,7 @@ class Stu(object):
 
         schedule_list = []
         with requests.Session() as s:
-            r = s.get(url + "/schedule/", headers=headers, params=payload)
+            r = s.get(url + "/schedule/" + ("list/14" if self.get_theater else ""), headers=headers, params=payload)
             event_list = []
             if r.status_code == 200:
                 event_list = self._parse_event(r.text)
@@ -276,5 +288,6 @@ class Stu(object):
 
 
 if __name__ == '__main__':
-    result = Stu(debug=True).get_schedule()
+    # result = Stu(debug=True).get_schedule()
+    result = Stu(query_date="2019/04/20", debug=False, theater=True).get_schedule()
     print(result)

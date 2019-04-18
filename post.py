@@ -18,13 +18,6 @@ if __name__ == '__main__':
     showroom_contents = Showroom.get_content()
     print(showroom_contents)
 
-
-    # 發送每日文
-    st = datetime.datetime.fromtimestamp(time.time()).strftime('%y%m%d')
-    daily_title = '[閒聊] 本日行程與閒聊 ' + st
-    daily_contents = Daily().get_content()
-    print(daily_contents)
-
     ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
     Password = PTT_PASSWORD
@@ -46,6 +39,12 @@ if __name__ == '__main__':
         PTTBot.Log('發文權限不足')
     else:
         PTTBot.Log('在 Test 板發文失敗')
+
+    # 發送每日文
+    st = datetime.datetime.fromtimestamp(time.time()).strftime('%y%m%d')
+    daily_title = '[閒聊] 本日行程與閒聊 ' + st
+    daily_contents = Daily().get_content()
+    print(daily_contents)
 
     ErrorCode = PTTBot.post(board, daily_title, daily_contents, 0, 0)
     if ErrorCode == PTT.ErrorCode.Success:
