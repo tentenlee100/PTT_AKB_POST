@@ -89,7 +89,7 @@ if __name__ == '__main__':
     ### 發文相關資訊填寫
     ID = PTT_ACCOUNT
     Password = PTT_PASSWORD
-    board = 'TEST'
+    board = 'AKB48'
     KickOtherLogin = False
 
     ###
