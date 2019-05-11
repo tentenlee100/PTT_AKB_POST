@@ -177,7 +177,8 @@ class Stu(object):
                 all_p = root.find_all('p')
             if len(all_p) == 0:
                 all_p = root.find_all('div')
-
+            if len(all_p) == 0:
+                all_p = root.find_all('p')
             detail_dic = {}
 
             now_key = ""
