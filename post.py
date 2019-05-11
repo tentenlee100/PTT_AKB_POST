@@ -46,15 +46,16 @@ if __name__ == '__main__':
     daily_contents = Daily().get_content()
     print(daily_contents)
 
-    ErrorCode = PTTBot.post(board, daily_title, daily_contents, 0, 0)
-    if ErrorCode == PTT.ErrorCode.Success:
-        PTTBot.Log('在' + board + '板今日閒聊文發文成功')
-        if board == 'AKB48':
-            PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
-
-    elif ErrorCode == PTT.ErrorCode.NoPermission:
-        PTTBot.Log('發文權限不足')
-    else:
-        PTTBot.Log('在 Test 板發文失敗')
+    for i in range(3):
+        ErrorCode = PTTBot.post(board, daily_title, daily_contents, 0, 0)
+        if ErrorCode == PTT.ErrorCode.Success:
+            PTTBot.Log('在' + board + '板今日閒聊文發文成功')
+            if board == 'AKB48':
+                PTTBot.throwWaterBall('emperor', '今日閒聊文已發文')
+            break
+        elif ErrorCode == PTT.ErrorCode.NoPermission:
+            PTTBot.Log('發文權限不足')
+        else:
+            PTTBot.Log('在 Test 板發文失敗')
 
     PTTBot.logout()
