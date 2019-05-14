@@ -172,7 +172,8 @@ class Stu(object):
         try:
             all_p =[]
             if self.get_theater:
-                all_p = root.find_all('div')
+                all_p = root.find_all('p')
+                all_p.extend(root.find_all('p'))
             else:
                 all_p = root.find_all('p')
             if len(all_p) == 0:
