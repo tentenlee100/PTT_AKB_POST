@@ -71,6 +71,7 @@ class Daily(object):
         'NGT48': "\x15[1;37m＊ \x15[31mNGT48      \x15[37m  ({age})  {name}\x15[m",
         'STU48': "\x15[1;37m＊ \x15[34mSTU48      \x15[37m  ({age})  {name}\x15[m",
         'BNK48': "\x15[1;37m＊ \x15[0;35mBNK48      \x15[1;37m  ({age})  {name}\x15[m",
+        'CGM48': "\x15[1;37m＊ \x15[1;36mCGM48      \x15[1;37m  ({age})  {name}\x15[m",
         'AKB48 TeamTP': "\x15[1;37m＊ \x15[33mAKB48 TeamTP\x15[37m ({age})  {name}\x15[m",
     }
 

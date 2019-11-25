@@ -118,19 +118,27 @@ class Nmb(object):
         shamekai = "nodnglo3pr5ep5bocb4dg3qpm0@group.calendar.google.com"
         tv = "oug148i963c3g23drkmgd4brbk@group.calendar.google.com"
 
-        self.request_nmb(birthday, '誕生日')
-        self.request_nmb(web, 'WEB')
-        self.request_nmb(magazine, '雑誌')
-        self.request_nmb(event, 'イベント')
-        self.request_nmb(hall, 'ホール公演')
-        self.request_nmb(radio, 'ラジオ')
-        self.request_nmb(sign, 'サイン会')
-        self.request_nmb(handshake_meeting, '握手会')
-        self.request_nmb(theater, 'NMB48劇場公演')
-        self.request_nmb(other, 'その他')
-        self.request_nmb(release, 'リリース')
-        self.request_nmb(shamekai, '写メ会')
-        self.request_nmb(tv, 'テレビ')
+        type_list = [
+            {birthday, '誕生日'},
+            {web, 'WEB'},
+            {magazine, '雑誌'},
+            {event, 'イベント'},
+            {hall, 'ホール公演'},
+            {radio, 'ラジオ'},
+            {sign, 'サイン会'},
+            {handshake_meeting, '握手会'},
+            {theater, 'NMB48劇場公演'},
+            {other, 'その他'},
+            {release, 'リリース'},
+            {shamekai, '写メ会'},
+            {tv, 'テレビ'},
+        ]
+
+        for key, name in type_list:
+            try:
+                self.request_nmb(key, name)
+            except:
+                pass
 
         self.schedule_list.sort(key=lambda x: x.start_time)
         return self.schedule_list
