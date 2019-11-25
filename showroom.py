@@ -64,8 +64,7 @@ class Showroom(object):
         contents += "" + "\r\n"
         contents += "twitter日飯製入口&分析站 http://tw48.net/" + "\r\n"
         contents += "" + "\r\n"
-        contents += "AKE48 Team TP instagram彙整網站 https://tenten.tw/tpeig/        " + "\r\n"
-        contents += "                   (有備份檔案) https://akb48-tp.tenten.tw/#/ig  " + "\r\n"
+        contents += "AKE48 Team TP instagram彙整網站 https://akb48-tp.tenten.tw/ig" + "\r\n"
         contents += "" + "\r\n"
         contents += "showroom 48 過濾 新工具: chrome extensions https://bit.ly/2HjQza9" + "\r\n"
         contents += "" + "\r\n"
@@ -73,7 +72,7 @@ class Showroom(object):
         contents += Showroom.get_lang_schedule()
         contents += "" + "\r\n"
         contents += "" + "\r\n"
-        contents += "https://akb48-tp.tenten.tw/#/lang team tp 浪相關紀錄 " + "\r\n"
+        contents += "https://akb48-tp.tenten.tw/lang team tp 浪相關紀錄 " + "\r\n"
 
 
         return contents
