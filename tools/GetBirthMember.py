@@ -13,7 +13,8 @@ class GetBirthMember(object):
             'ＮＧＴ４８': "NGT48",
             'ＳＴＵ４８': "STU48",
             'ＢＮＫ４８': "BNK48",
-            'AKB48 TeamTP': "AKB48 TeamTP",
+            'AKB48 Team TP': "AKB48 TeamTP",
+            'ＣＧＭ４８': "CGM48"
         }
     def get_birth_member(self, query_date):
         r = requests.get("https://www.ptt.cc/bbs/AKB48/M.1506782468.A.727.html")
