@@ -112,20 +112,28 @@ class Ngt(object):
         magazine = "u2dktkl97uipdnqiirikm99eo4@group.calendar.google.com"
         web = "uruvbla1g4sqpj3d6qn1ai2a0s@group.calendar.google.com"
 
-        self.request_ngt(performance, '公演')
-        self.request_ngt(audition, 'オーディション')
-        self.request_ngt(birthday, '誕生日')
-        self.request_ngt(other, 'その他')
-        # self.request_ngt(holidays, '日本の祝日')
-        self.request_ngt(release, 'リリース')
-        self.request_ngt(radio, 'ラジオ')
-        self.request_ngt(ngt48cal, 'ngt48cal@gmail.com')
-        self.request_ngt(media, 'メディア')
-        self.request_ngt(handshake_meeting, '握手会')
-        self.request_ngt(tv, 'テレビ')
-        self.request_ngt(event, 'イベント')
-        self.request_ngt(magazine, '新聞・雑誌')
-        self.request_ngt(web, 'WEB')
+        type_list = [
+            (performance, '公演'),
+            (audition, 'オーディション'),
+            (birthday, '誕生日'),
+            # (holidays, '日本の祝日'),
+            (other, 'その他'),
+            (release, 'リリース'),
+            (radio, 'ラジオ'),
+            (ngt48cal, 'ngt48cal@gmail.com'),
+            (media, 'メディア'),
+            (handshake_meeting, '握手会'),
+            (tv, 'テレビ'),
+            (event, 'イベント'),
+            (magazine, '新聞・雑誌'),
+            (web, 'WEB'),
+        ]
+
+        for key, name in type_list:
+            try:
+                self.request_ngt(key, name)
+            except:
+                pass
 
         self.schedule_list.sort(key=lambda x: x.start_time)
         return self.schedule_list
