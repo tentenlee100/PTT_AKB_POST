@@ -7,7 +7,7 @@ chardet==3.0.4
 cryptography==2.4.2
 cssselect==1.0.3
 idna==2.8
-lxml==4.3.0
+lxml==4.6.5
 paramiko==2.4.2
 progressbar2==3.39.2
 PTTLibrary==0.7.25
